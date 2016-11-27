@@ -55,13 +55,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   #gem for support the rails panel in google crome extension
   gem 'meta_request'
-
-  #for heroku
-  gem 'heroku'
-end
-
-group :heroku do
-  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
