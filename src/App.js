@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Navbar } from 'react-bootstrap';
+
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          Look ma, I just started!
-        </p>
-      </div>
+      <Navbar staticTop>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#">Paperboy</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+      </Navbar>
     );
   }
 }
