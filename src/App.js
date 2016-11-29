@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Navbar, Grid, Accordion, Panel, Row, Col } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
+import Stream from './stream/Stream.js';
 import './App.css';
 
 class App extends Component {
@@ -16,18 +17,7 @@ class App extends Component {
           </Navbar.Header>
         </Navbar>
 
-        <Grid>
-          <Row>
-            <Col md={8} mdOffset={2} xs={12}>
-              <Accordion accordion>
-                <Panel header="First title">
-                </Panel>
-                <Panel header="Second title">
-                </Panel>
-              </Accordion>
-            </Col>
-          </Row>
-        </Grid>
+        <Stream />
       </div>
     );
   }
