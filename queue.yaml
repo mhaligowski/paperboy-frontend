@@ -1,0 +1,6 @@
+queue:
+- name: CrawlerQueue
+  rate: 5/s
+- name: StreamUpdates
+  rate: 5/s
+
