@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 
-import Stream from './stream/Stream.js';
 import './App.css';
 
 class App extends Component {
@@ -17,7 +16,7 @@ class App extends Component {
           </Navbar.Header>
         </Navbar>
 
-        <Stream />
+        { this.props.children }
       </div>
     );
   }
