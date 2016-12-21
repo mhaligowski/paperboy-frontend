@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, 
+    ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import 'whatwg-fetch';
 

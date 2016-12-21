@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Panel, Grid, Row, Col, Label } from 'react-bootstrap';
+import {
+    Panel, Grid, Row, Col, Label,
+    Form, FormGroup, FormControl, Button, InputGroup
+} from 'react-bootstrap';
 
 class Subscriptions extends Component {
     constructor() {
@@ -31,9 +34,28 @@ class Subscriptions extends Component {
 
         return (
             <Grid>
-                <Col md={8} mdOffset={2} xs={12}>
-                    <h1>Your subscriptions</h1>
-                </Col>
+                <Row>
+                    <Col md={8} mdOffset={2} xs={12}>
+                        <h4>Add new subscription</h4>
+                        <Form>
+                            <FormGroup>
+                                <InputGroup>
+                                    <FormControl type="text"
+                                        placeholder="https://gravityfallsnews.com/feed/rss.xml" />
+                                    <InputGroup.Button>
+                                        <Button>Add</Button>
+                                    </InputGroup.Button>
+                                </InputGroup>
+                            </FormGroup>
+                        </Form>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col md={8} mdOffset={2} xs={12}>
+                        <h4>Your subscriptions</h4>
+                    </Col>
+                </Row>
 
                 <Row>
                     <Col md={8} mdOffset={2} xs={12}>
