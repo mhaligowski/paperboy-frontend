@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
-    Panel, Grid, Row, Col, Label,
+    Grid, Row, Col,
     Form, FormGroup, FormControl, Button, InputGroup
 } from 'react-bootstrap';
 
-class Subscriptions extends Component {
-    constructor() {
-        super();
+import SubscriptionItem from './SubscriptionItem'
 
-        this.state = {
-            subscriptions: []
-        }
-    }
+class Subscriptions extends Component {
 
     loadData() {
         fetch("http://subscriptions.paperboy-149314.appspot.com/subscriptions?user_id=dummy_id")
             .then(r => r.json())
-            .then(j => this.setState({
-                subscriptions: j
-            }));
+            .then((l) => {
+                l.forEach((element) => {
+                    this.props.addSubscription(element);
+                }, this);
+            });
     }
 
     componentDidMount() {
@@ -26,7 +24,7 @@ class Subscriptions extends Component {
     }
 
     render() {
-        let items = this.state.subscriptions.map(s => {
+        let items = this.props.subscriptions.map(s => {
             return (
                 <SubscriptionItem key={s.SubscriptionId} subscription={s} />
             );
@@ -67,19 +65,25 @@ class Subscriptions extends Component {
     }
 }
 
-class SubscriptionItem extends Component {
-    render() {
-        var title;
-        if (this.props.subscription.Title) {
-            title = this.props.subscription.Title;
-        } else {
-            title = <Label bsStyle="warning">No title given</Label>;
-        }
-
-        return (
-            <Panel>{title}</Panel>
-        );
+const mapStateToProps = (state = {}) => {
+    return {
+        subscriptions: state.hasOwnProperty("subscriptions") ?
+            state.subscriptions : []
     }
 }
 
-export default Subscriptions;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addSubscription: (s) => {
+            dispatch({
+                type: "ADD_SUBSCRIPTION",
+                subscription: s
+            });
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Subscriptions);
