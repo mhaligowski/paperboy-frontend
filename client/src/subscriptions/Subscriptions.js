@@ -9,6 +9,12 @@ import SubscriptionItem from './SubscriptionItem'
 
 class Subscriptions extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {url: ''};
+        this.handleInput = this.handleInput.bind(this);
+    }
+
     loadData() {
         fetch("http://subscriptions.paperboy-149314.appspot.com/subscriptions?user_id=dummy_id")
             .then(r => r.json())
@@ -23,8 +29,12 @@ class Subscriptions extends Component {
         this.loadData();
     }
 
+    handleInput(e) {
+        this.setState({url: e.target.value});
+    }
+
     render() {
-        let items = this.props.subscriptions.map(s => {
+        let items = this.props.subscriptions.elements.map(s => {
             return (
                 <SubscriptionItem key={s.SubscriptionId} subscription={s} />
             );
@@ -35,13 +45,17 @@ class Subscriptions extends Component {
                 <Row>
                     <Col md={8} mdOffset={2} xs={12}>
                         <h4>Add new subscription</h4>
-                        <Form>
+                        <Form onSubmit={() => this.props.createSubscription(this.state.url)}>
                             <FormGroup>
                                 <InputGroup>
                                     <FormControl type="text"
+                                        value={this.state.url}
+                                        onChange={this.handleInput}
                                         placeholder="https://gravityfallsnews.com/feed/rss.xml" />
                                     <InputGroup.Button>
-                                        <Button>Add</Button>
+                                        <Button type="submit">
+                                            Add
+                                        </Button>
                                     </InputGroup.Button>
                                 </InputGroup>
                             </FormGroup>
@@ -65,10 +79,9 @@ class Subscriptions extends Component {
     }
 }
 
-const mapStateToProps = (state = {}) => {
+const mapStateToProps = (state) => {
     return {
-        subscriptions: state.hasOwnProperty("subscriptions") ?
-            state.subscriptions : []
+        subscriptions: state.subscriptions
     }
 }
 
@@ -78,6 +91,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: "ADD_SUBSCRIPTION",
                 subscription: s
+            });
+        },
+        createSubscription: (url) => {
+            dispatch({
+                type: "NEW_SUBSCRIPTION",
+                url: url
             });
         }
     }
